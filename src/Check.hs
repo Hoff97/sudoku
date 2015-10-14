@@ -1,9 +1,10 @@
 module Check where
 
+import           Sudoku
 import           Test.QuickCheck
 
-prop_revapp :: [Int] -> [Int] -> Bool
-prop_revapp xs ys = reverse (xs++ys) == reverse ys ++ reverse xs
+prop_revapp :: [Int] -> Bool
+prop_revapp xs = if length xs == 9 then replicate 9 xs == (fromBlocks $ blocks $ replicate 9 xs) else True
 
-main :: IO ()
-main = quickCheck prop_revapp
+test :: IO ()
+test = quickCheck prop_revapp

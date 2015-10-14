@@ -68,3 +68,11 @@ createMatrix f i j = map (\line -> map (f line) [0..j - 1]) [0..i - 1]
 subs :: Int -> [a] -> [[a]]
 subs x l@(_:ls) = if x > length l then [] else take x l:subs x ls
 subs _ [] = []
+
+update2 :: Int -> Int -> a -> [[a]] -> [[a]]
+update2 i j a l = update i updated l
+    where
+        updated = update j a (l!!i)
+
+update :: Int -> a -> [a] -> [a]
+update x a l = take x l ++ [a] ++ drop (x+1) l

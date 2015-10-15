@@ -1,6 +1,8 @@
 module Main where
 
 import           Sudoku
+import           System.CPUTime
+import           Util
 
 main :: IO ()
 main = do
@@ -10,5 +12,5 @@ main = do
     case solve sudoku of
         solution:_  -> do
             putStrLn "At least one solution found, writing to file"
-            writeFile file (toString solution)
+            diagramWindowed $ toDiagram solution
         _           -> putStrLn "No Solution found"

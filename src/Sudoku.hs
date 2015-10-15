@@ -1,9 +1,12 @@
 module Sudoku where
 
-import           Control.Applicative ((<$>))
-import           Control.Arrow       (first)
-import           Data.List           (findIndex)
+import           Control.Applicative    ((<$>))
+import           Control.Arrow          (first)
+import           Data.List              (findIndex)
 import           Debug.Trace
+import           Diagrams.Backend.Cairo
+import           Diagrams.Core.Envelope
+import           Diagrams.Prelude
 import           Matrix
 import           Safe
 
@@ -91,3 +94,8 @@ solve x
         _       -> []
     where
         step = reduceSudoku x
+
+toDiagram x = foldl (===) mempty $ map (foldl (|||) mempty . map field) x
+    where
+        field (Set a) = text (show a) # scale 30 <> square 40
+        field _ = square 40

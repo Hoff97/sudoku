@@ -4,6 +4,8 @@ import           Sudoku
 import           System.CPUTime
 import           Util
 
+--TODO: Possibility to input the sudoku via a GUI
+-- | Asks for an input file, containing a unsolved sudoku, reads and solves the sudoku and displays the solution in a simple GTK window
 main :: IO ()
 main = do
     putStrLn "Pleas give an input file"

@@ -1,7 +1,6 @@
 module Matrix where
 
--- | A Matrix is a list of lines of values.
---   A line is a list of values.
+-- | A Matrix is a twodimensional list of values.
 --   Example:
 --   a :: Matrix Int
 --   a = [[1,2,3],[4,5,6],[7,8,9]]
@@ -65,14 +64,24 @@ toVect ((x:_):ys) = x:toVect ys
 createMatrix :: (Int -> Int -> a) -> Int -> Int -> Matrix a
 createMatrix f i j = map (\line -> map (f line) [0..j - 1]) [0..i - 1]
 
+-- | Gives all sublists of a given length.
+--   Example:
+--   subs 3 [1,2,3,4,5] = [[1,2,3],[2,3,4],[3,4,5]]
 subs :: Int -> [a] -> [[a]]
 subs x l@(_:ls) = if x > length l then [] else take x l:subs x ls
 subs _ [] = []
 
+
+-- | Updates a twodimensional list at the given position.
+--   Example:
+--   update2 1 2 5 [[1,1,1],[1,1,1],[1,1,1]] = [[1,1,1],[1,1,5],[1,1,1]]
 update2 :: Int -> Int -> a -> [[a]] -> [[a]]
 update2 i j a l = update i updated l
     where
         updated = update j a (l!!i)
 
+-- | Updates a list at the given position.
+--   Example:
+--   update 2 10 [1,2,3,4,5,6] = [1,2,10,4,5,6]
 update :: Int -> a -> [a] -> [a]
 update x a l = take x l ++ [a] ++ drop (x+1) l

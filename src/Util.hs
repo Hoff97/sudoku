@@ -10,6 +10,7 @@ import           Diagrams.Prelude                hiding (set)
 import           Diagrams.TwoD.Size
 import           Graphics.UI.Gtk
 
+-- | Displays a diagram in a gtk window, using the diagrams-gtk package.
 diagramWindowed :: Diagram Cairo -> IO ()
 diagramWindowed x = do
     initGUI
